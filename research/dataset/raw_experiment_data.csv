@@ -1,0 +1,11 @@
+id,sample_name,control_group_iterations,experiment_group_iterations,control_duration_ms,experiment_duration_ms,control_tokens,experiment_tokens,initial_lint_errors,final_lint_errors,status
+1,Sample_Component_01,4,1,3200,980,1450,520,3,0,PASS
+2,Sample_Component_02,3,1,2800,920,1320,480,2,0,PASS
+3,Sample_Component_03,5,2,4100,1650,1890,780,4,0,PASS
+4,Sample_Component_04,3,1,2600,890,1210,450,2,0,PASS
+5,Sample_Component_05,4,2,3400,1520,1560,710,3,0,PASS
+6,Sample_Component_06,2,1,1900,810,950,410,1,0,PASS
+7,Sample_Component_07,6,2,4900,1780,2100,820,5,0,PASS
+8,Sample_Component_08,4,1,3100,940,1400,490,3,0,PASS
+9,Sample_Component_09,3,1,2500,870,1180,440,2,0,PASS
+10,Sample_Component_10,4,2,3300,1490,1520,690,3,0,PASS
