@@ -2,7 +2,6 @@ import React from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ResearchPaper } from './components/ResearchPaper';
-import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 
@@ -17,7 +16,6 @@ export const App: React.FC = () => {
       >
         <Hero />
         <ResearchPaper />
-        <Projects />
         <Contact />
       </main>
       <Footer />

@@ -14,8 +14,7 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { href: '#research-paper', label: '연구 논문 (과제 10)', desc: '가설 검증 & DOCX / 재현 패키지' },
-  { href: '#projects', label: '프로젝트', desc: 'SKT ALEPH 1기 핵심 활동 내역' },
+  { href: '#research-paper', label: '연구 논문', desc: '가설 검증 & DOCX / 재현 패키지' },
   { href: '#contact', label: '연락처', desc: '공식 이메일 및 GitHub 소통' },
 ];
 
@@ -141,7 +140,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             className="group flex items-center gap-2 text-sm font-bold tracking-tight text-neutral-900 transition-opacity hover:opacity-80 dark:text-white"
           >
             <span className="relative tracking-tight">
-              jinyeongjang_myritual-agent
+              jinyeongjang_research-paper
               <span className="absolute inset-x-0 -bottom-0.5 h-[1.5px] origin-left scale-x-0 rounded-full bg-neutral-900 transition-transform duration-200 ease-out group-hover:scale-x-100 dark:bg-white" />
             </span>
           </a>

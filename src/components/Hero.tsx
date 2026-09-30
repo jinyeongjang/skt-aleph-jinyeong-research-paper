@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, FolderCode, FileText } from 'lucide-react';
+import { Sparkles, ArrowRight, Mail, FileText } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface HeroProps {
@@ -81,14 +81,14 @@ export const Hero: React.FC<HeroProps> = ({ className }) => {
           </motion.a>
 
           <motion.a
-            href="#projects"
+            href="#contact"
             whileHover={{ y: -1.5 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             className="group inline-flex items-center gap-1.5 rounded-xl border border-slate-200/80 bg-white/90 px-3.5 py-2 text-xs font-bold text-slate-800 shadow-2xs transition-all duration-200 hover:bg-slate-100 hover:shadow-xs sm:px-4 sm:text-sm dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-200 dark:hover:bg-slate-700"
           >
-            <FolderCode className="h-4 w-4 transition-transform duration-200 group-hover:scale-105" />
-            <span>프로젝트 보기</span>
+            <Mail className="h-4 w-4 transition-transform duration-200 group-hover:scale-105" />
+            <span>연락처 및 소통</span>
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
           </motion.a>
         </div>
