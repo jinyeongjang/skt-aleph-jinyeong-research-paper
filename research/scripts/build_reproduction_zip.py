@@ -28,7 +28,12 @@ def build_zip():
         ("research/dataset/pandas_category_breakdown.csv", os.path.join(root_dir, "research", "dataset", "pandas_category_breakdown.csv")),
         ("research/scripts/run_experiment.py", os.path.join(root_dir, "research", "scripts", "run_experiment.py")),
         ("research/scripts/analyze_with_pandas.py", os.path.join(root_dir, "research", "scripts", "analyze_with_pandas.py")),
+        ("research/scripts/plot_research_figures.py", os.path.join(root_dir, "research", "scripts", "plot_research_figures.py")),
         ("research/scripts/generate_docx_paper.py", os.path.join(root_dir, "research", "scripts", "generate_docx_paper.py")),
+        ("research/figures/fig1_pass_rate_and_efficiency.png", os.path.join(root_dir, "research", "figures", "fig1_pass_rate_and_efficiency.png")),
+        ("research/figures/fig2_latency_comparison.png", os.path.join(root_dir, "research", "figures", "fig2_latency_comparison.png")),
+        ("research/figures/fig3_tradeoff_pareto.png", os.path.join(root_dir, "research", "figures", "fig3_tradeoff_pareto.png")),
+        ("research/figures/fig4_domain_breakdown.png", os.path.join(root_dir, "research", "figures", "fig4_domain_breakdown.png")),
     ]
 
     # 재현용 README.md 생성

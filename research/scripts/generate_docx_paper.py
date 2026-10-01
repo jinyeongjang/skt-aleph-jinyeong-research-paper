@@ -495,21 +495,6 @@ def create_research_docx(output_path):
         "[5.3 출처 확인 방법 (Fact-Checking Methodology · T10-C20)]\n"
         "모든 참고문헌은 Google Scholar, DBLP, arXiv 공식 메타데이터, Crossref DOI Resolver를 통해 3단계 전수 대조를 거쳐 진위를 확인하였다."
     )
-
-    # 6. 제출 체크리스트 및 재현 절차 (Checklist & Reproduction · T10-C46 ~ T10-C49)
-    add_section_header("6", "제출 체크리스트 및 재현 절차 (Checklist & Reproduction)")
-    add_body_paragraph(
-        "[6.1 짧은 확인 방법 4줄 (T10-C29, T10-C46)]\n"
-        "① 어디로 가나요: 프로젝트 루트 디렉터리로 이동합니다.\n"
-        "② 3단계 이내 무엇을 하나요: 터미널에서 python research/scripts/run_experiment.py 명령을 실행합니다.\n"
-        "③ 무엇이 보이면 통과인가요: 50개 과제 단위 테스트 통과율(순차 30.0% vs 조율 100.0%) 및 [최종 가설 채택] 판정이 콘솔에 출력되면 통과입니다.\n"
-        "④ 안 될 때 무엇이 보이나요: FileNotFoundError 또는 문법 에러가 발생하며, 이 경우 python --version을 확인합니다.\n\n"
-        "[6.2 AI와 나의 판단 3줄 (T10-C49)]\n"
-        "① AI에게 맡긴 일: 50개 알고리즘 단위 테스트 벤치마크 테스트 케이스 및 각 토폴로지별 인터페이스 초안 작성, APA 참고문헌 서식 정리\n"
-        "② 학생이 직접 판단한 일: 외부 유료 API나 확률적 난수 추정(random.random())을 전면 배제하고, 실제 파이썬 런타임 assert와 time.perf_counter()를 통해 100% 정직한 로컬 실측 연구로 전환한 것\n"
-        "③ AI 제안을 따르지 않은 일: AI가 추천한 가상의 최신 학술지 논문 3편을 전수 팩트체크하여 완전한 할루시네이션임을 밝혀내고 전면 퇴출한 뒤 실제 ICLR, ICML 공인 논문으로 교체한 것"
-    )
-
     doc.save(output_path)
     print(f"Academic DOCX successfully generated with 4 high-res figures and 5 tables at: {output_path}")
 
