@@ -27,8 +27,7 @@
    - [5. 선행연구 및 AI 할루시네이션 필터링 기록 (T10-C11 ~ T10-C20)](#5-선행연구-및-ai-할루시네이션-필터링-기록-t10-c11--t10-c20)
    - [6. 실험 설계와 원자료 결과 요약 (T10-C21 ~ T10-C40)](#6-실험-설계와-원자료-결과-요약-t10-c21--t10-c40)
    - [7. 과제 10 완주 체크리스트 (T10-C01 ~ T10-C51)](#7-과제-10-완주-체크리스트-t10-c01--t10-c51)
-4. [🤖 과제 9: 나를 말하는 에이전트](#-과제-9-나를-말하는-에이전트)
-5. [💻 로컬 개발 및 품질 검증 스크립트](#-로컬-개발-및-품질-검증-스크립트)
+4. [💻 로컬 개발 및 재현 실행 명령어](#-로컬-개발-및-재현-실행-명령어)
 
 ---
 
@@ -36,10 +35,10 @@
 
 - **AI와 함께 쓰는 첫 논문 (과제 10 · T10-C01 ~ T10-C51, condi 10-7)**:
   - **IMRaD 표준 학술 논문 전문 뷰어**: 표지, 10줄 요약 초록, 서론, 연구 방법, 실험 결과, 논의, 참고문헌 전문을 지원하는 모던 논문 리더
-  - **실제 DOCX 파일 자동 생성 및 다운로드 (condi 10-7)**: `python-docx` 기반 표준 학술 규격(여백 2.54cm, 초록 박스, IMRaD 다단 서식)의 DOCX 파일 즉시 다운로드 제공
-  - **단일 ZIP 재현 패키지 (T10-C48)**: 논문 원고(`PAPER.md`, `.docx`), 원자료(`JSON`, `CSV`), 재현 스크립트(`run_experiment.py`, `analyze_with_pandas.py`) 일체를 단일 ZIP 파일로 패키징
+  - **실제 DOCX 파일 자동 생성 및 다운로드 (condi 10-7)**: `python-docx` 기반 표준 학술 규격(여백 2.54cm, 초록 박스, IMRaD 다단 서식, 4대 도표 및 5개 표 내장)의 DOCX 파일 즉시 다운로드 제공
+  - **단일 ZIP 재현 패키지 (T10-C48)**: 논문 원고(`PAPER.md`, `.docx`), 원자료(`JSON`, `CSV`), 재현 스크립트(`run_experiment.py`, `analyze_with_pandas.py`, `plot_research_figures.py`), 도표 이미지 4종 일체를 단일 ZIP 파일로 패키징
   - **50개 과제 실측 벤치마크 및 Pandas 기술 통계 분석**: 3회 반복 실증(R=3, 총 600회 실행) 기반 중앙 조율형(+70.0%p 통과율 향상) 및 토론형 대비 지연시간 70.62% 단축, 통신량 74.02% 절감 실증
-  - **학술 논문 규격 멀티 패널 통계 차트 (Figure 2, Panel a~e)**: 오차 막대($\pm 1\sigma$), 가설 기준선, 7대 도메인별 세분화 차트 및 공식 캡션 제공
+  - **학술 논문 규격 멀티 패널 통계 차트 (Figure 2, Panel a~e)**: 오차 막대($\pm 1\sigma$), 가설 기준선, 8대 도메인별 세분화 차트 및 공식 캡션 제공
   - **AI 할루시네이션 가짜 문헌 적발 및 필터링 (T10-C15)**: AI가 제안한 가짜 논문 3건을 실물 DOI/Crossref 대조 후 적발·제외한 내역 투명 공개
 - **반응형 모던 레이아웃 & 웹 접근성**:
   - 모노크롬 & 은은한 글래스모피즘 스타일 및 상단 헤더 고정
@@ -55,33 +54,38 @@ skt-aleph-jinyeong-research-paper/
 ├── condition/                  # 과제 평가 기준 공식 명세 텍스트 (condi 10-1 ~ 10-7)
 ├── public/                     # 정적 웹 에셋 및 다운로드 산출물
 │   └── downloads/
-│       ├── skt-aleph-jinyeong-research-paper.docx  # 📄 학술 표준 DOCX 논문 파일
-│       └── research-reproduction-package.zip      # 📦 단일 ZIP 재현 패키지
+│       ├── skt-aleph-jinyeong-research-paper.docx  # 📄 학술 표준 DOCX 논문 파일 (4대 도표·5대 표 내장)
+│       └── research-reproduction-package.zip      # 📦 단일 ZIP 재현 패키지 (15개 파일 압축)
 ├── research/                   # 연구 원자료 데이터셋 및 자동화 스크립트
 │   ├── dataset/
 │   │   ├── raw_experiment_data.csv                # 원자료 50개 과제 3회 반복 실측 CSV
 │   │   ├── raw_experiment_data.json               # 원자료 50개 과제 실측 JSON
 │   │   ├── pandas_summary_statistics.json         # Pandas 기술 통계 요약 데이터
-│   │   └── pandas_category_breakdown.csv          # 7대 도메인별 세분화 CSV
+│   │   └── pandas_category_breakdown.csv          # 8대 도메인별 세분화 CSV (50과제)
+│   ├── figures/                                   # 300 DPI 출판 규격 고해상도 학술 차트 4종
+│   │   ├── fig1_pass_rate_and_efficiency.png      # 도표 1. 통과율 및 효율성 지수 비교 차트
+│   │   ├── fig2_latency_comparison.png            # 도표 2. 지연시간 평균 및 P95 비교 차트
+│   │   ├── fig3_tradeoff_pareto.png               # 도표 3. 지연시간 vs 페이로드 파레토 산점도
+│   │   └── fig4_domain_breakdown.png              # 도표 4. 8대 도메인별 통과율 격차 차트
 │   ├── scripts/
 │   │   ├── run_experiment.py                      # 3회 반복 재현 및 통계 계산 스크립트
 │   │   ├── analyze_with_pandas.py                 # Pandas 심층 기술 통계 분석 스크립트
-│   │   ├── generate_docx_paper.py                 # DOCX 생성 파이썬 스크립트
+│   │   ├── plot_research_figures.py               # matplotlib 기반 학술 도표 4종 생성기
+│   │   ├── generate_docx_paper.py                 # 4대 도표와 5개 표 내장 DOCX 생성기
 │   │   └── build_reproduction_zip.py              # ZIP 패키징 빌드 스크립트
 │   └── README.md                                  # 재현 가이드 문서
 ├── src/
 │   ├── components/
 │   │   ├── Header.tsx          # 상단 고정 헤더, 네비게이션 앵커, 테마/모션 토글
 │   │   ├── Hero.tsx            # 첫 화면 인트로 및 핵심 4대 지표 퀵 CTA
+│   │   ├── TrafficSimulator.tsx# 🔄 4대 토폴로지 실시간 자가 치유 시뮬레이터
 │   │   ├── ResearchPaper.tsx   # 🎓 과제 10 논문 IMRaD 리더, 가설 랩, 팩트체크, 재현 4-탭
 │   │   ├── ResearchCharts.tsx  # 📊 Figure 2 학술 멀티 패널 실측 통계 차트 (Panel a~e)
-│   │   ├── RitualAgent.tsx     # 🤖 과제 9 리추얼 기록 뷰어 & 서사 컴포넌트
-│   │   ├── Projects.tsx        # 프로젝트 갤러리 섹션
+│   │   ├── Contact.tsx         # 공식 소통 채널 및 링크
 │   │   └── Footer.tsx          # 푸터 및 저작권 명시
 │   ├── data/
 │   │   ├── paperData.ts        # 📊 과제 10 논문 메타데이터, 가설, 원자료, 선행연구 데이터
-│   │   ├── projectsData.ts     # 과제 1/8/9/10 프로젝트 데이터
-│   │   └── ritualData.ts       # 리추얼 데이터 모듈
+│   │   └── projectsData.ts     # 프로젝트 메타데이터
 │   ├── lib/
 │   │   └── utils.ts            # 유틸리티 함수
 │   ├── App.tsx                 # 최상위 레이아웃
@@ -194,3 +198,36 @@ skt-aleph-jinyeong-research-paper/
 - [x] **원자료와 스크립트를 포함한 1개의 단일 ZIP 재현 패키지를 제공합니다 (T10-C48)**
 - [x] **AI와 나의 판단 3줄 및 짧은 확인 방법 4줄을 작성했습니다 (T10-C46, T10-C49)**
 - [x] **무로그인 시크릿 웹 브라우저에서 즉시 열람 및 다운로드가 가능합니다 (T10-C51)**
+
+---
+
+## 💻 로컬 개발 및 재현 실행 명령어
+
+### 1. 웹 프론트엔드 개발 및 빌드 검증
+
+```bash
+npm install       # 의존성 패키지 설치
+npm run dev       # 로컬 개발 서버 실행 (http://localhost:5173)
+npm run build     # TypeScript 컴파일 및 Vite 번들링 빌드
+npm run lint      # Oxlint 정적 코드 분석 (경고/오류 0건)
+npm run format    # Prettier 코드 서식 자동 정렬
+```
+
+### 2. 연구 실험 재현 및 논문 산출물 빌드
+
+```bash
+# 1. 50개 과제 4대 토폴로지 단위 테스트 3회 반복 실증 및 결과 출력
+python research/scripts/run_experiment.py
+
+# 2. Pandas(v3.0.6) 기반 기술 통계량 및 8대 도메인 세분화 분석
+python research/scripts/analyze_with_pandas.py
+
+# 3. 300 DPI 출판 규격 고해상도 학술 차트 4종 생성
+python research/scripts/plot_research_figures.py
+
+# 4. 4대 도표와 5개 표가 내장된 학술 표준 DOCX 논문 파일 자동 생성
+python research/scripts/generate_docx_paper.py
+
+# 5. 연구 원자료 및 스크립트가 포함된 단일 재현 패키지(ZIP) 빌드
+python research/scripts/build_reproduction_zip.py
+```
