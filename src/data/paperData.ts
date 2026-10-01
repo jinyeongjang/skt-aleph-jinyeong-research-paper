@@ -131,7 +131,7 @@ export const RESEARCH_PAPER_DATA: ResearchPaperData = {
     englishTitle:
       'Empirical Evaluation of Test Pass Rate and Execution Latency Across Multi-Agent Collaboration Topologies in Algorithmic Problem Solving and Unit Test Verification',
     author: '장진영',
-    affiliation: 'SKT ALEPH 인공지능 엔지니어링 과정 1기',
+    affiliation: 'SKT ALEPH 1기',
     date: '2026.10.01',
     liveUrl: 'https://skt-aleph-jinyeong-research-paper.vercel.app',
     githubUrl: 'https://github.com/jinyeongjang/skt-aleph-jinyeong-research-paper',

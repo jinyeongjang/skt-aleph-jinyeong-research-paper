@@ -2,7 +2,7 @@
 
 > **Empirical Evaluation of Test Pass Rate and Execution Latency Across Multi-Agent Collaboration Topologies in Algorithmic Problem Solving and Unit Test Verification**  
 > **저자**: 장진영 (SKT ALEPH 1기)  
-> **소속**: SKT ALEPH 인공지능 엔지니어링 과정  
+> **소속**: SKT ALEPH 1기  
 > **작성일**: 2026년 10월 1일  
 > **공개 배포 URL**: [https://skt-aleph-jinyeong-research-paper.vercel.app](https://skt-aleph-jinyeong-research-paper.vercel.app)  
 > **GitHub 소스코드**: [https://github.com/jinyeongjang/skt-aleph-jinyeong-research-paper](https://github.com/jinyeongjang/skt-aleph-jinyeong-research-paper)  
@@ -12,7 +12,7 @@
 
 ## 📌 요약 (Abstract)
 
-소프트웨어 엔지니어링 및 자가 치유(Self-Healing) 시스템에서 복합 알고리즘 결함을 해결하기 위해 다중 에이전트 협업(Multi-Agent System) 구조가 도입되고 있으나, 에이전트 간 연결 구조(Topology)가 실제 단위 테스트(Unit Test) 통과율과 실행 지연시간, 통신 오버헤드에 미치는 정량적 실측 연구는 부족한 실정이다. 본 연구는 외부 유료 API나 확률적 모의 추정에 의존하지 않고, 50개의 실제 파이썬 알고리즘 문제(배열, 문자열, 스택, 동적계획법, 수학, 비트연산 등)와 150여 개의 단위 테스트 세트(N=50)를 구축하여, 4가지 핵심 협업 토폴로지인 **순차형(Linear Pipeline)**, **중앙 조율형(Star/Hub-and-Spoke)**, **완전 연결 토론형(Full Mesh Debate)**, **계층형(Hierarchical Tree)** 구조의 실제 동작 성능을 로컬 파이썬 런타임 환경에서 100% 직접 실측하였다. 실험 결과, 순차형 파이프라인은 얕은 검토로 인한 연쇄 오류(Cascading Error)로 인해 30.00%의 통과율에 그쳤으나, 중앙 조율형은 엣지 케이스 단위 테스트 피드백을 통해 1차 결함을 즉시 교정하여 **100.00%의 통과율(+70.00%p 향상)**을 달성하였다. 또한 전원 교차 검증을 수행하는 완전 연결 토론형 대비 **실행 지연시간을 70.00% 단축(0.020ms ➡️ 0.006ms)**하고, **통신 페이로드 전송량을 74.02% 절감(878.0B ➡️ 228.1B)**하여 중앙 조율형 구조가 자원 효율성과 신뢰도 측면에서 가장 이상적인 엔지니어링 아키텍처임을 실증하였다.
+소프트웨어 엔지니어링 및 자가 치유(Self-Healing) 시스템에서 복합 알고리즘 결함을 해결하기 위해 다중 에이전트 협업(Multi-Agent System) 구조가 도입되고 있으나, 에이전트 간 연결 구조(Topology)가 실제 단위 테스트(Unit Test) 통과율과 실행 지연시간, 통신 오버헤드에 미치는 정량적 실측 연구는 부족한 실정이다. 본 연구는 외부 유료 API나 확률적 모의 추정에 의존하지 않고, 50개의 실제 파이썬 알고리즘 문제(배열, 문자열, 스택, 동적계획법, 수학, 비트연산 등)와 150여 개의 단위 테스트 세트(N=50)를 구축하여, 4가지 핵심 협업 토폴로지인 **순차형(Linear Pipeline)**, **중앙 조율형(Star/Hub-and-Spoke)**, **완전 연결 토론형(Full Mesh Debate)**, **계층형(Hierarchical Tree)** 구조의 실제 동작 성능을 로컬 파이썬 런타임 환경에서 100% 직접 실측하였다. 실험 결과, 순차형 파이프라인은 얕은 검토로 인한 연쇄 오류(Cascading Error)로 인해 30.00%의 통과율에 그쳤으나, 중앙 조율형은 엣지 케이스 단위 테스트 피드백을 통해 1차 결함을 즉시 교정하여 **100.00%의 통과율(+70.00%p 향상)**을 달성하였다. 또한 전원 교차 검증을 수행하는 완전 연결 토론형 대비 **실행 지연시간을 70.62% 단축(0.0194ms ➡️ 0.0057ms)**하고, **통신 페이로드 전송량을 74.02% 절감(878.0B ➡️ 228.1B)**하여 중앙 조율형 구조가 자원 효율성과 신뢰도 측면에서 가장 이상적인 엔지니어링 아키텍처임을 실증하였다.
 
 - **주제어 (Keywords)**: 다중 에이전트 시스템, 협업 토폴로지, 단위 테스트 검증, 알고리즘 문제 해결, 연쇄 오류 차단, 자가 치유 루프, 실행 지연시간 실측
 

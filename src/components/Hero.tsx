@@ -79,18 +79,11 @@ export const Hero: React.FC<HeroProps> = ({ className }) => {
             <span className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
               {paper.meta.author} (Jinyeong Jang)
             </span>
-            <sup className="text-2xs font-mono text-blue-600 dark:text-blue-400">1*</sup>
             <span className="text-neutral-400">|</span>
-            <span className="text-neutral-700 dark:text-neutral-300">
-              <sup>1</sup> {paper.meta.affiliation} (SK Telecom AI Engineering Fellowship)
-            </span>
+            <span className="text-neutral-700 dark:text-neutral-300">SKT ALEPH 1기</span>
           </div>
 
           <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-neutral-500 dark:text-neutral-400">
-            <span>
-              <strong className="text-neutral-700 dark:text-neutral-300">*교신저자:</strong>{' '}
-              jinyeongjang@users.noreply.github.com
-            </span>
             <span>
               <strong className="text-neutral-700 dark:text-neutral-300">작성일:</strong> 2026.10.01
             </span>
