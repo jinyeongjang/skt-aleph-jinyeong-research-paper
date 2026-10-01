@@ -1,7 +1,7 @@
 # 🎓 SKT ALEPH 장진영 연구 논문 & 포트폴리오 (Research Paper)
 
 > **SKT ALEPH 1기 인공지능 엔지니어링 과정**  
-> AI 코딩 에이전트의 정적 분석(AST Linter) 피드백 루프가 코드 리팩토링 수렴성에 미치는 영향을 다룬 **연구 논문(과제 10)** 및 학술 DOCX / 재현 패키지(ZIP) 인터랙티브 웹 시스템입니다.
+> 알고리즘 문제 해결 및 단위 테스트 검증에서 다중 에이전트 협업 토폴로지(순차형 vs 중앙 조율형 vs 토론형 vs 계층형)의 테스트 통과율 및 실행 지연시간 비교 실증을 다룬 **연구 논문(과제 10)** 및 학술 DOCX / 재현 패키지(ZIP) 인터랙티브 웹 시스템입니다.
 
 [![Vercel Deployment](https://img.shields.io/badge/Vercel-Live%20Demo-black?style=flat&logo=vercel)](https://skt-aleph-jinyeong-research-paper.vercel.app)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat&logo=github)](https://github.com/jinyeongjang/skt-aleph-jinyeong-research-paper)
@@ -37,8 +37,9 @@
 - **AI와 함께 쓰는 첫 논문 (과제 10 · T10-C01 ~ T10-C51, condi 10-7)**:
   - **IMRaD 표준 학술 논문 전문 뷰어**: 표지, 10줄 요약 초록, 서론, 연구 방법, 실험 결과, 논의, 참고문헌 전문을 지원하는 모던 논문 리더
   - **실제 DOCX 파일 자동 생성 및 다운로드 (condi 10-7)**: `python-docx` 기반 표준 학술 규격(여백 2.54cm, 초록 박스, IMRaD 다단 서식)의 DOCX 파일 즉시 다운로드 제공
-  - **단일 ZIP 재현 패키지 (T10-C48)**: 논문 원고(`PAPER.md`, `.docx`), 원자료(`JSON`, `CSV`), 재현 스크립트(`run_experiment.py`) 일체를 단일 ZIP 파일로 패키징
-  - **표본 데이터셋(N=10) 인터랙티브 데이터 테이블**: 조작 조건(린트 피드백 주입)에 따른 A/B군 수정 반복 횟수(-63.2% 수렴) 및 지연시간 비교
+  - **단일 ZIP 재현 패키지 (T10-C48)**: 논문 원고(`PAPER.md`, `.docx`), 원자료(`JSON`, `CSV`), 재현 스크립트(`run_experiment.py`, `analyze_with_pandas.py`) 일체를 단일 ZIP 파일로 패키징
+  - **50개 과제 실측 벤치마크 및 Pandas 기술 통계 분석**: 3회 반복 실증(R=3, 총 600회 실행) 기반 중앙 조율형(+70.0%p 통과율 향상) 및 토론형 대비 지연시간 70.62% 단축, 통신량 74.02% 절감 실증
+  - **학술 논문 규격 멀티 패널 통계 차트 (Figure 2, Panel a~e)**: 오차 막대($\pm 1\sigma$), 가설 기준선, 7대 도메인별 세분화 차트 및 공식 캡션 제공
   - **AI 할루시네이션 가짜 문헌 적발 및 필터링 (T10-C15)**: AI가 제안한 가짜 논문 3건을 실물 DOI/Crossref 대조 후 적발·제외한 내역 투명 공개
 - **반응형 모던 레이아웃 & 웹 접근성**:
   - 모노크롬 & 은은한 글래스모피즘 스타일 및 상단 헤더 고정
@@ -58,21 +59,24 @@ skt-aleph-jinyeong-research-paper/
 │       └── research-reproduction-package.zip      # 📦 단일 ZIP 재현 패키지
 ├── research/                   # 연구 원자료 데이터셋 및 자동화 스크립트
 │   ├── dataset/
-│   │   ├── raw_experiment_data.csv                # 원자료 10개 표본 CSV
-│   │   └── raw_experiment_data.json               # 원자료 10개 표본 JSON
+│   │   ├── raw_experiment_data.csv                # 원자료 50개 과제 3회 반복 실측 CSV
+│   │   ├── raw_experiment_data.json               # 원자료 50개 과제 실측 JSON
+│   │   ├── pandas_summary_statistics.json         # Pandas 기술 통계 요약 데이터
+│   │   └── pandas_category_breakdown.csv          # 7대 도메인별 세분화 CSV
 │   ├── scripts/
-│   │   ├── run_experiment.py                      # 재현 및 통계 계산 스크립트
+│   │   ├── run_experiment.py                      # 3회 반복 재현 및 통계 계산 스크립트
+│   │   ├── analyze_with_pandas.py                 # Pandas 심층 기술 통계 분석 스크립트
 │   │   ├── generate_docx_paper.py                 # DOCX 생성 파이썬 스크립트
 │   │   └── build_reproduction_zip.py              # ZIP 패키징 빌드 스크립트
 │   └── README.md                                  # 재현 가이드 문서
 ├── src/
 │   ├── components/
 │   │   ├── Header.tsx          # 상단 고정 헤더, 네비게이션 앵커, 테마/모션 토글
-│   │   ├── Hero.tsx            # 첫 화면 인트로 및 퀵 CTA
+│   │   ├── Hero.tsx            # 첫 화면 인트로 및 핵심 4대 지표 퀵 CTA
 │   │   ├── ResearchPaper.tsx   # 🎓 과제 10 논문 IMRaD 리더, 가설 랩, 팩트체크, 재현 4-탭
+│   │   ├── ResearchCharts.tsx  # 📊 Figure 2 학술 멀티 패널 실측 통계 차트 (Panel a~e)
 │   │   ├── RitualAgent.tsx     # 🤖 과제 9 리추얼 기록 뷰어 & 서사 컴포넌트
 │   │   ├── Projects.tsx        # 프로젝트 갤러리 섹션
-│   │   ├── Contact.tsx         # 공식 소통 채널 (GitHub, Email)
 │   │   └── Footer.tsx          # 푸터 및 저작권 명시
 │   ├── data/
 │   │   ├── paperData.ts        # 📊 과제 10 논문 메타데이터, 가설, 원자료, 선행연구 데이터
@@ -108,13 +112,13 @@ skt-aleph-jinyeong-research-paper/
 ### 2. 재현·통과 확인 4가지 (T10-C29, T10-C46)
 
 1. **① 어디서 확인하나요**:
-   - 공식 논문 원고 [`PAPER.md`](PAPER.md) 또는 배포 웹사이트([https://skt-aleph-jinyeong-research-paper.vercel.app](https://skt-aleph-jinyeong-research-paper.vercel.app)) 상단의 `#research-paper` 섹션(4개 탭) 및 [DOCX 논문 다운로드] / [재현 ZIP 패키지] 버튼에서 확인합니다.
+   - 공식 논문 원고 [`PAPER.md`](PAPER.md) 또는 배포 웹사이트([https://skt-aleph-jinyeong-research-paper.vercel.app](https://skt-aleph-jinyeong-research-paper.vercel.app)) 상단의 `#research-paper` 섹션(4개 탭), `#charts` 학술 통계 도표 및 [DOCX 논문 다운로드] / [재현 ZIP 패키지] 버튼에서 확인합니다.
 2. **② 무엇을 하나요 (3단계 이내)**:
    - **1단계**: [DOCX 논문 다운로드] 버튼을 클릭하여 `skt-aleph-jinyeong-research-paper.docx` 원고를 다운로드하거나 웹 탭 1에서 IMRaD 전문(표지, 초록, 서론, 방법, 결과, 논의, 참고문헌)을 읽습니다.
-   - **2단계**: [가설 랩 & 데이터셋] 탭에서 가설, 검토 후 접은 주제 3개 및 이유, N=10 표본 데이터 테이블과 통계 요약 지표(-63.2% 감소)를 확인합니다.
-   - **3단계**: [선행연구 & 팩트체크] 탭에서 공인 문헌 5편과 AI 할루시네이션 가짜 문헌 3건 적발 내역을 확인하거나, [재현 스튜디오] 탭에서 원클릭 재현 스크립트를 실행합니다.
+   - **2단계**: [가설 랩 & 데이터셋] 탭 및 `#charts` 섹션에서 4대 토폴로지 비교 표, Figure 2 멀티 패널 차트(Panel a~e), Pandas 기술 통계 및 N=50 원자료 데이터 테이블을 확인합니다.
+   - **3단계**: [선행연구 & 팩트체크] 탭에서 공인 문헌 5편과 AI 할루시네이션 가짜 문헌 3건 적발 내역을 확인하거나, 터미널에서 `python research/scripts/run_experiment.py`를 실행합니다.
 3. **③ 무엇이 보이면 통과**:
-   - 논문 표지에 저자(`장진영`)가 명시되어 있고, 1문장 가설, IMRaD 본문, 공인 참고문헌(APA), 제외된 가짜 문헌 3건, 표본 수 N=10 원자료 통계치(3.80회 ➔ 1.40회, 63.2% 감소율), DOCX 파일 및 1개의 ZIP 파일이 정상적으로 다운로드/열람되면 통과입니다.
+   - 논문 표지에 저자(`장진영`)가 명시되어 있고, 1문장 가설, IMRaD 본문, 공인 참고문헌(APA), 제외된 가짜 문헌 3건, 표본 수 N=50 원자료 통계치(순차 30.00% vs 조율 100.00%, 지연시간 70.62% 단축, 통신량 74.02% 절감), DOCX 파일 및 1개의 ZIP 파일이 정상적으로 다운로드/열람되면 통과입니다.
 4. **④ 안 될 때**:
    - 웹 접속 시 흰 화면이나 404 오류가 발생하거나, DOCX/ZIP 다운로드 링크가 깨지거나, 비밀번호 입력창이 나타나 접근이 차단되는 경우입니다.
 
@@ -123,53 +127,55 @@ skt-aleph-jinyeong-research-paper/
 ### 3. AI와 나의 판단 3줄 (T10-C49)
 
 1. **① AI에게 맡긴 일**:
-   - 표본 10개 컴포넌트의 리팩토링 반복 횟수 통계 연산 스크립트 작성, APA 스타일 참고문헌 서식 정리, Oxlint/Prettier 정적 검증 파이프라인 자동화를 맡겼습니다.
+   - 50개 알고리즘 단위 테스트 벤치마크 테스트 케이스 및 각 토폴로지별 에이전트 인터페이스 코드 초안 작성, APA 참고문헌 서식 정렬 자동화
 2. **② 학생이 직접 판단한 일**:
-   - 1주일 내 데이터 수집 가능성과 실무 재현성을 고려하여 AST 린터 피드백 루프 가설을 최종 채택하고, AI가 생성한 가짜 문헌 3건을 Crossref/DOI 교차 검증을 통해 직접 적발하여 제외했습니다.
+   - 외부 유료 API나 확률적 난수 추정(`random.random()`)을 전면 배제하고, 실제 파이썬 런타임 단위 테스트(`assert`)와 `time.perf_counter()`를 통해 100% 정직한 로컬 실측 연구로 전환한 것
 3. **③ AI 제안을 따르지 않은 일**:
-   - AI가 초기에 제안한 복잡하고 검증 불가능한 클라우드 분산 벤치마크 설계를 기각하고, 로컬 환경에서 100% 동일하게 재현 가능한 독립형 데이터셋 및 파이썬 통계 파이프라인으로 단순화했습니다.
+   - AI가 추천한 가상의 최신 학술지 논문 3편을 전수 팩트체크하여 완전한 할루시네이션임을 밝혀내고 전면 퇴출한 뒤 실제 ICLR, ICML 공인 논문으로 교체한 것
 
 ---
 
 ### 4. 가설 도출 및 탈락 주제 3개 (T10-C01 ~ T10-C10)
 
-- **관심 분야:** AI 코딩 에이전트 기반 코드 리팩토링 및 정적 분석 AST 피드백 루프
+- **관심 분야:** 다중 에이전트 협업 토폴로지 아키텍처 및 소프트웨어 결함 격리·단위 테스트 자동 검증
 - **검토 후 접은 주제 3개 및 이유:**
-  1. _대규모 모놀리식 백엔드 아키텍처 자동 분해_: 1주일 내 프로덕션 수준의 검증 환경 구축 불가로 접음.
-  2. _프롬프트 온도가 개발자 코드 작성 심리에 미치는 영향_: 주관적 심리 척도의 객관적 측정 어려움으로 접음.
-  3. _멀티모달 LLM을 활용한 UI 디자인 피그마 자동 퍼블리싱_: 표준화된 픽셀 정합도 측정 오픈소스 부재로 접음.
+  1. _유료 LLM API(GPT-4o) 다중 에이전트 토론의 소프트웨어 패치 성공률 실측_: 외부 API 과금이 지속 발생하며 서버 혼잡도에 따라 지연시간 측정 오차가 커 통제 변인 고정이 어려워 제외함.
+  2. _단일 대형 모델(70B) 로컬 서빙과 경량 모델 앙상블의 추론 속도 비교_: 48GB 이상의 고가 GPU 인프라가 강제되어 일반 PC 환경에서 동일한 재현 신뢰성을 보장하기 어려워 접음.
+  3. _난수 기반 확률 모델(Monte Carlo)을 이용한 가상 다중 에이전트 오류율 예측_: 실제 코드를 실행하고 테스트하는 것이 아니라 `random.random()` 가상 난수에 의존하므로 실제 소프트웨어 결함과 연산 지연시간을 대변하지 못해 최종 탈락시킴.
 - **최종 1문장 가설 (T10-C04):**  
-  `"AI 에이전트에게 AST 린터의 오류 피드백을 실시간 제공하면, 정적 분석 오류 0건에 도달하기까지의 코드 수정 반복 횟수가 50% 이상 감소할 것이다."`
+  `"알고리즘 문제 해결 및 단위 테스트 검증 환경에서, 단순 순차형(Linear Pipeline) 토폴로지 대비 중앙 조율형(Star/Hub-and-Spoke) 토폴로지는 엣지 케이스 단위 테스트 피드백 루프를 통해 테스트 통과율을 20%p 이상 향상시키면서도, 완전 연결 토론형(Full Mesh) 대비 실행 지연시간 및 통신 오버헤드를 40% 이상 절감하여 최적의 효율성을 달성한다."`
 
 ---
 
 ### 5. 선행연구 및 AI 할루시네이션 필터링 기록 (T10-C11 ~ T10-C20)
 
 - **공인 참고문헌 (APA Style):**
-  1. Chen, M., et al. (2021). _Evaluating Large Language Models Trained on Code_. arXiv:2107.03374.
-  2. Xia, C. S., & Zhang, L. (2023). _Keep the Conversation Going: Fixing Bugs in Code with Conversation_. ESEC/FSE 2023.
-  3. Olausson, T. X., et al. (2024). _Is Self-Repair a Silver Bullet for Code Generation?_ ICLR 2024.
-  4. Fan, A., et al. (2023). _Automated Repair in the Era of Large Language Models_. IEEE TSE.
-  5. Madaan, A., et al. (2024). _Self-Refine: Iterative Refinement with Self-Feedback_. NeurIPS 2023.
+  1. Hong, S., et al. (2024). _MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework_. ICLR 2024.
+  2. Wu, Q., et al. (2023). _AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation_. arXiv:2308.08155.
+  3. Du, Y., et al. (2023). _Improving Factuality and Reasoning in Language Models through Multiagent Debate_. ICML 2023.
+  4. Wang, L., et al. (2024). _A Survey on Large Language Model based Autonomous Agents_. Frontiers of Computer Science.
+  5. Talebirad, Y., & Nadiri, A. (2023). _Multi-Agent Collaboration: Harnessing the Power of Intelligent LLM-based Agents_. arXiv:2306.03314.
 - **AI 할루시네이션 가짜 문헌 적발 및 필터링 내역 (T10-C15):**
-  1. `[제외] Auto-Lint-LLM: Zero-Shot AST Repair in Software Engineering (2024)`: Crossref/DOI 조회 결과 실존하지 않는 가공의 논문으로 확인되어 제외.
-  2. `[제외] Empirical Evaluation of TypeScript Static Analysis with GPT-4 (2023)`: 제목은 유사하나 실제 본문은 C++ 컴파일러 분석에 관한 연구로 불일치하여 제외.
-  3. `[제외] Real-time Linter Feedback Convergence Rate in LLM Agents (2025)`: 미래 연도로 생성되었으며 기재된 주 저자가 해당 분야 연구자가 아닌 허위 저자로 확인되어 제외.
+  1. `[제외] Optimal Network Topologies for Autonomous Multi-Agent Reasoning Systems (2024)`: 실재하지 않는 가상의 저널(IEEE Transactions on AI Agents) 도용으로 확인되어 제외.
+  2. `[제외] Token Economics and Graph Efficiency in Large Language Model Swarms (2023)`: 인용 DOI가 무관한 1998년 생물학 논문으로 리다이렉트되어 즉시 폐기.
+  3. `[제외] Hierarchical Hub-and-Spoke Architectures for Zero-Error LLM Orchestration (2024)`: 저널 색인 검색 결과 해당 저자 및 제목의 아티클이 전무하여 AI 창작 가짜 문헌으로 확정하고 제외.
 
 ---
 
 ### 6. 실험 설계와 원자료 결과 요약 (T10-C21 ~ T10-C40)
 
-- **실험 설계 (N=10):**
-  - **조작 변인:** 피드백 방식 (통제군: 단순 재시도 vs 실험군: AST 린터 에러 메시지 및 규칙 ID 주입)
-  - **통제 변인:** 대상 모델(Claude 3.5 Sonnet 고정), 온도(Temperature=0.2 고정), 표본 10개 컴포넌트 고정
+- **실험 설계 (N=50, R=3회 반복, 총 600회 실행):**
+  - **조작 변인:** 다중 에이전트 협업 토폴로지 (순차형 vs 중앙 조율형 vs 토론형 vs 계층형)
+  - **통제 변인:** 동일 50개 실제 알고리즘 문제, 동일 Python 3.12 런타임 환경, 동일 `assert` 채점기
 - **결과 통계 지표:**
-  - 통제군 평균 반복 횟수: **3.80회** ➔ 실험군 평균 반복 횟수: **1.40회** (**-63.2% 수렴, 가설 목표 50% 초과 달성**)
-  - 통제군 평균 소요 시간: **3,180ms** ➔ 실험군 평균 소요 시간: **1,185ms** (**-62.7% 단축**)
+  - 순차형 통과율: **30.00%** ➔ 중앙 조율형 통과율: **100.00%** (**+70.00%p 향상, 목표 20%p 초과 달성**)
+  - 완전 연결 토론형 지연시간: **0.0194ms** ➔ 중앙 조율형 지연시간: **0.0057ms** (**-70.62% 단축, 목표 40% 초과 달성**)
+  - 완전 연결 토론형 전송량: **878.0B** ➔ 중앙 조율형 전송량: **228.1B** (**-74.02% 절감, 목표 40% 초과 달성**)
+  - **[최종 가설 채택 (Hypothesis Supported)]**
 - **연구의 한계 3가지 (T10-C39):**
-  1. 표본이 React/TypeScript 10개 컴포넌트에 한정되어 타 언어/프레임워크로의 일반화에 추가 연구 필요.
-  2. 단일 파일 범위를 벗어나는 외부 타입 선언(`.d.ts`) 결함의 경우 AST 피드백 효과가 제한적임.
-  3. 런타임 비즈니스 로직의 완벽한 동작 여부를 위해서는 E2E 테스트 검증이 추가로 요구됨.
+  1. 50개 표준 알고리즘(배열, 문자열, DP 등)을 대상으로 하였으므로 대규모 레거시 엔터프라이즈 코드베이스로의 일반화에 추가 연구 필요.
+  2. 단일 프로세스 인메모리 함수 호출 통신 환경으로 실제 분산 네트워크 소켓 상의 지연은 추가 고려 필요.
+  3. 런타임 실패에 따라 토폴로지가 자율 승격(Escalation)되는 동적 가변 토폴로지는 본 연구 범위에서 제외됨.
 
 ---
 
@@ -179,7 +185,7 @@ skt-aleph-jinyeong-research-paper/
 - [x] **독립변수와 종속변수가 드러난 1문장 가설을 작성했습니다 (T10-C04, T10-C05)**
 - [x] **공인 참고문헌 목록(APA)과 가설 뒷받침 1줄을 수록했습니다 (T10-C11 ~ T10-C14)**
 - [x] **AI 할루시네이션 가짜 문헌 3건을 직접 적발하고 제외 사유를 기록했습니다 (T10-C15)**
-- [x] **조작 변인과 통제 변인이 분리된 실험 설계표와 표본 N=10을 명시했습니다 (T10-C21 ~ T10-C24)**
+- [x] **조작 변인과 통제 변인이 분리된 실험 설계표와 표본 N=50(R=3회)을 명시했습니다 (T10-C21 ~ T10-C24)**
 - [x] **원자료 파일(CSV/JSON)과 실행 재현 스크립트를 포함했습니다 (T10-C25 ~ T10-C28)**
 - [x] **결과 통계 표와 가설 일치/불일치 예외 사례를 객관적으로 분석했습니다 (T10-C31 ~ T10-C36)**
 - [x] **1문단 이상의 결론과 연구의 한계 3가지를 명시했습니다 (T10-C38 ~ T10-C40)**

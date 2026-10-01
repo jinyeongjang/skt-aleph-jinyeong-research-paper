@@ -25,3 +25,7 @@ dist-ssr
 
 # Reference projects
 projects/
+
+# Python cache
+__pycache__/
+*.pyc

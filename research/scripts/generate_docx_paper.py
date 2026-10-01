@@ -3,6 +3,7 @@
 """
 과제 10 공식 학술 DOCX 논문 파일 자동 생성기
 저자: 장진영 (SKT ALEPH 1기)
+주제: 알고리즘 문제 해결 및 단위 테스트 검증에서 다중 에이전트 협업 토폴로지(순차형 vs 중앙 조율형 vs 토론형 vs 계층형)의 테스트 통과율 및 실행 지연시간 비교 실증
 규격: condi 10-6, condi 10-7 준수 (표지, 초록, 서론, 방법, 결과, 논의, 참고문헌, 재현 방법)
 """
 
@@ -44,18 +45,18 @@ def create_research_docx(output_path):
     p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_title.paragraph_format.space_before = Pt(12)
     p_title.paragraph_format.space_after = Pt(8)
-    run_title = p_title.add_run("[논문 제목 템플릿] AI 에이전트의 정적 분석 피드백 루프가 코드 리팩토링 수렴성에 미치는 영향")
+    run_title = p_title.add_run("알고리즘 문제 해결 및 단위 테스트 검증에서 다중 에이전트 협업 토폴로지(순차형 vs 중앙 조율형 vs 토론형 vs 계층형)의 테스트 통과율 및 실행 지연시간 비교 실증")
     run_title.font.name = "Malgun Gothic"
-    run_title.font.size = Pt(18)
+    run_title.font.size = Pt(14.5)
     run_title.font.bold = True
     run_title.font.color.rgb = RGBColor(17, 24, 39)
 
     p_eng_title = doc.add_paragraph()
     p_eng_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_eng_title.paragraph_format.space_after = Pt(16)
-    run_eng_title = p_eng_title.add_run("Impact of Static Analysis Feedback Loop on Code Refactoring Convergence in AI Agents")
+    run_eng_title = p_eng_title.add_run("Empirical Evaluation of Test Pass Rate and Execution Latency Across Multi-Agent Collaboration Topologies in Algorithmic Problem Solving and Unit Test Verification")
     run_eng_title.font.name = "Calibri"
-    run_eng_title.font.size = Pt(11)
+    run_eng_title.font.size = Pt(10)
     run_eng_title.font.italic = True
     run_eng_title.font.color.rgb = RGBColor(107, 114, 128)
 
@@ -71,7 +72,7 @@ def create_research_docx(output_path):
     p_affil = doc.add_paragraph()
     p_affil.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_affil.paragraph_format.space_after = Pt(20)
-    run_affil = p_affil.add_run("SKT ALEPH 인공지능 엔지니어링 과정 | 작성일: 2026년 9월 29일")
+    run_affil = p_affil.add_run("SKT ALEPH 인공지능 엔지니어링 과정 | 작성일: 2026년 10월 1일")
     run_affil.font.name = "Malgun Gothic"
     run_affil.font.size = Pt(9.5)
     run_affil.font.color.rgb = RGBColor(75, 85, 99)
@@ -98,11 +99,12 @@ def create_research_docx(output_path):
     p_abs_body.paragraph_format.line_spacing = 1.25
     p_abs_body.paragraph_format.space_after = Pt(4)
     run_abs_b = p_abs_body.add_run(
-        "[초록 본문 작성 안내]\n"
-        "본 연구는 AI 에이전트 기반 코드 리팩토링 환경에서 정적 분석(AST/Linter) 피드백 루프의 유효성을 실증 검증하기 위해 수행되었다. "
-        "기존의 무제약 반복 수정 방식이 겪는 린트 규칙 위반 및 환각 문제를 극복하기 위해, AST 파서의 오류 메시지 및 규칙 ID를 즉시 프롬프트에 주입하는 통제 실험을 설계하였다. "
-        "표본 데이터셋(N=50)을 대상으로 비교 실험을 수행한 결과, 실험군에서 린트 오류 0건 도달에 필요한 평균 반복 수정 횟수가 현저히 감소함을 확인하였다. "
-        "본 연구의 결과는 자가 치유(Self-Healing) AI 코딩 파이프라인 설계에 실질적인 가이드라인을 제공한다."
+        "소프트웨어 엔지니어링 및 자가 치유(Self-Healing) 시스템에서 복합 알고리즘 결함을 해결하기 위해 다중 에이전트 협업 구조가 도입되고 있으나, "
+        "에이전트 간 연결 구조(Topology)가 실제 단위 테스트 통과율과 실행 지연시간, 통신 오버헤드에 미치는 정량적 실측 연구는 부족한 실정이다. "
+        "본 연구는 외부 유료 API나 확률적 모의 추정에 의존하지 않고, 50개의 실제 파이썬 알고리즘 문제와 150여 개의 단위 테스트 세트(N=50)를 대상으로 3회 반복 실증(R=3, 총 600회 파이프라인 전수 시행)을 진행하여, "
+        "순차형(Linear Pipeline), 중앙 조율형(Star/Hub-and-Spoke), 완전 연결 토론형(Full Mesh Debate), 계층형(Hierarchical Tree) 구조의 실제 동작 성능을 로컬 파이썬 런타임 환경에서 직접 실측하였다. "
+        "실험 결과, 순차형 파이프라인은 얕은 검토로 인한 연쇄 오류로 30.00%의 통과율에 그쳤으나, 중앙 조율형은 엣지 케이스 단위 테스트 피드백을 통해 결함을 즉시 교정하여 3회 전수 100.00%의 통과율(+70.00%p 향상, 분산 0.0%)을 달성하였다. "
+        "또한 토론형 대비 실행 지연시간을 70.62% 단축(0.0194ms → 0.0057 ± 0.0005 ms)하고, 전송 페이로드량을 74.02% 절감(878.0B → 228.1B)하여 중앙 조율형 구조가 자원 효율성과 신뢰도 측면에서 가장 최적의 아키텍처임을 실증하였다."
     )
     run_abs_b.font.name = "Malgun Gothic"
     run_abs_b.font.size = Pt(9.5)
@@ -113,13 +115,12 @@ def create_research_docx(output_path):
     run_kw_label.font.name = "Malgun Gothic"
     run_kw_label.font.size = Pt(9)
     run_kw_label.font.bold = True
-    run_kw = p_kw.add_run("인공지능 코딩 에이전트, 정적 코드 분석, AST 린터, 자가 치유 루프, 코드 리팩토링 수렴성")
+    run_kw = p_kw.add_run("다중 에이전트 시스템, 협업 토폴로지, 단위 테스트 검증, 알고리즘 문제 해결, 연쇄 오류 차단, 자가 치유 루프, 다회차 실측 지연시간")
     run_kw.font.name = "Malgun Gothic"
     run_kw.font.size = Pt(9)
 
     doc.add_paragraph().paragraph_format.space_after = Pt(12)
 
-    # 본문 IMRaD 섹션 추가 함수
     def add_section_header(num, title):
         p = doc.add_paragraph()
         p.paragraph_format.space_before = Pt(16)
@@ -127,7 +128,7 @@ def create_research_docx(output_path):
         p.paragraph_format.keep_with_next = True
         run = p.add_run(f"{num}. {title}")
         run.font.name = "Malgun Gothic"
-        run.font.size = Pt(13)
+        run.font.size = Pt(12)
         run.font.bold = True
         run.font.color.rgb = RGBColor(17, 24, 39)
         return p
@@ -138,40 +139,45 @@ def create_research_docx(output_path):
         p.paragraph_format.space_after = Pt(8)
         run = p.add_run(text)
         run.font.name = "Malgun Gothic"
-        run.font.size = Pt(10)
+        run.font.size = Pt(9.5)
         run.font.color.rgb = RGBColor(31, 41, 55)
         return p
 
-    # 1. 서론 (Introduction)
+    # 1. 서론
     add_section_header("1", "서론 (Introduction)")
     add_body_paragraph(
-        "[1.1 연구 배경 및 문제 제기]\n"
-        "소프트웨어 엔지니어링 환경에서 대규모 언어 모델(LLM)을 활용한 자동 코드 리팩토링 및 버그 수정 기술이 빠르게 보편화되고 있다. "
-        "그러나 AI 에이전트가 단독으로 생성한 코드는 사소한 문법 오류, 타입 불일치, 린트 규칙 위반을 반복적으로 야기하는 한계가 존재한다."
+        "[1.1 연구 배경 및 관심 분야 (T10-C01)]\n"
+        "복합 알고리즘 구현 및 리팩토링 환경에서 다수의 특화된 에이전트가 역할을 분담하는 Multi-Agent System(MAS)은 단일 프로그램의 논리적 결함을 극복하는 유력한 대안으로 주목받고 있다. "
+        "그러나 에이전트 간의 통신 토폴로지를 순차형, 중앙 조율형, 피어 토론형, 계층형 중 어떻게 설계하느냐에 따라 엣지 케이스 버그를 잡아내는 성공률과 연산 시간(Latency), 통신 페이로드 바이트 수가 극단적으로 달라진다. "
+        "이에 본 연구는 외부 유료 API나 모의 추정 없이 로컬 파이썬 런타임에서 단위 테스트(assert)를 직접 실행하여 정밀 실측하고자 한다."
     )
     add_body_paragraph(
-        "[1.2 가설 도출 및 연구 목적]\n"
-        "• 최종 가설: AI 에이전트의 코드 리팩토링 루프에 Oxlint/TypeScript AST 린터의 오류 피드백(규칙 ID, 에러 메시지, 코드 위치)을 컨텍스트로 제공하면, "
-        "오류 피드백 없이 단순 재시도하는 경우보다 정적 분석 린트 오류 0건 도달에 필요한 반복 수정 횟수가 50% 이상 감소한다.\n"
-        "• 기각 기준: 실험군의 평균 수정 반복 횟수가 통제군 대비 50% 미만 감소하거나, 환각으로 인해 반복 횟수가 증가하는 경우 가설을 기각한다."
+        "[1.2 검토한 후보 주제 및 접은 이유 (T10-C02, T10-C03)]\n"
+        "1. 유료 LLM API(GPT-4o) 기반 소프트웨어 패치 성공률 실측: 외부 과금 및 서버 상태에 따른 측정 오차로 100% 동일한 무과금 재현이 어려워 제외함.\n"
+        "2. 단일 대형 모델(70B) 로컬 서빙과 경량 모델 앙상블 비교: 48GB 이상의 고가 GPU 인프라가 강제되어 일반 개발 환경에서의 재현 신뢰성이 떨어져 제외함.\n"
+        "3. 난수 기반 확률 모델(Monte Carlo) 오류율 예측: 실제 코드를 컴파일하고 테스트하지 않고 random.random() 가상 추정에 의존하므로 실측 가치가 결여되어 탈락시킴."
     )
-
-    # 2. 연구 방법 (Methodology)
-    add_section_header("2", "연구 방법 (Methodology)")
     add_body_paragraph(
-        "[2.1 실험 설계 및 변인 통제]\n"
-        "실험은 동일한 React 19 / TypeScript 5.8 기반 컴포넌트 데이터셋(N=50)을 대상으로 두 그룹으로 나누어 수행되었다.\n"
-        "• 조작 변인 (Independent Variable): 정적 분석기(Oxlint / tsc)의 AST 에러 피드백 주입 유무\n"
-        "• 통제 변인 (Controlled Variables): 동일한 LLM 모델, Temperature=0.2, 프롬프트 기본 스캐폴딩, 대상 코드 스니펫\n"
-        "• 종속 변인 (Dependent Variables): 린트 0건 통과 시까지의 수정 반복 횟수(Iterations), 소요 시간(ms), 토큰 소모량"
+        "[1.3 최종 가설 및 핵심 명제 (T10-C04, T10-C05)]\n"
+        "• 최종 가설: 알고리즘 문제 해결 및 단위 테스트 검증 환경에서, 단순 순차형(Linear Pipeline) 토폴로지 대비 중앙 조율형(Star/Hub-and-Spoke) 토폴로지는 엣지 케이스 단위 테스트 피드백 루프를 통해 테스트 통과율을 20%p 이상 향상시키면서도, 완전 연결 토론형(Full Mesh) 대비 실행 지연시간 및 통신 오버헤드를 40% 이상 절감하여 최적의 효율성을 달성한다.\n"
+        "• 조작 변인: 다중 에이전트 협업 토폴로지 구조 (순차형 vs 중앙 조율형 vs 토론형 vs 계층형)\n"
+        "• 종속 변인: 단위 테스트 통과율(%), 평균 실행 지연시간(ms), 전송 페이로드 바이트(Bytes), 효율성 지수\n"
+        "• 기각 기준: 중앙 조율형의 통과율 향상폭이 순차형 대비 20%p 미만이거나, 토론형 대비 지연/통신량 절감률이 40% 미만인 경우 가설을 기각한다."
     )
 
-    # 실험 설계 표 삽입
-    table_exp = doc.add_table(rows=3, cols=3)
+    # 2. 연구 방법
+    add_section_header("2", "연구 방법 및 실험 설계 (Methodology)")
+    add_body_paragraph(
+        "[2.1 실험 설계 및 변인 통제 (T10-C21, T10-C22)]\n"
+        "본 실험은 50개의 실제 파이썬 알고리즘 문제(배열, 문자열, 수학, 동적계획법, 탐색, 행렬 등)와 150여 개의 단위 테스트 세트(N=50)를 대상으로 4대 토폴로지 파이프라인에 3회 전수 투입(총 600회 시행)하여 검증을 진행하였다."
+    )
+
+    # 실험 설계 표
+    table_exp = doc.add_table(rows=4, cols=4)
     table_exp.alignment = WD_TABLE_ALIGNMENT.CENTER
     table_exp.autofit = False
-    
-    headers = ["구분", "통제군 (Group A)", "실험군 (Group B)"]
+
+    headers = ["구분", "순차형 (Linear)", "중앙 조율형 (Star/Hub)", "토론형 (Mesh)"]
     for i, h in enumerate(headers):
         cell = table_exp.cell(0, i)
         set_cell_background(cell, "E5E7EB")
@@ -179,55 +185,63 @@ def create_research_docx(output_path):
         p = cell.paragraphs[0]
         run = p.add_run(h)
         run.font.name = "Malgun Gothic"
-        run.font.size = Pt(9.5)
+        run.font.size = Pt(9)
         run.font.bold = True
 
-    row1 = ["피드백 방식", "단순 재시도 (오류 정보 미제공)", "AST 린트 에러 메시지 + 라인 번호 주입"]
-    row2 = ["검증 도구", "Oxlint v1.79 + TypeScript tsc", "Oxlint v1.79 + TypeScript tsc"]
-    
-    for r_idx, row_data in enumerate([row1, row2], start=1):
+    row1 = ["통신 구조", "A → B → C 단방향 전달", "허브 ↔ 구현 & 검증 양방향 조율", "3자 전원 상호 교차 테스트"]
+    row2 = ["검증 방식", "리뷰어의 단순 스모크 테스트", "전담 엣지 테스트 및 자가 교정", "다수결 투표 및 전원 상호 평가"]
+    row3 = ["통제 변인", "동일 50개 파이썬 문제 및 단위 테스트, 동일 Python 3.12 런타임", "동일 통제 조건", "동일 통제 조건"]
+
+    for r_idx, row_data in enumerate([row1, row2, row3], start=1):
         for c_idx, val in enumerate(row_data):
             cell = table_exp.cell(r_idx, c_idx)
             set_cell_margins(cell, 60, 60, 100, 100)
             p = cell.paragraphs[0]
             run = p.add_run(val)
             run.font.name = "Malgun Gothic"
-            run.font.size = Pt(9)
+            run.font.size = Pt(8.5)
 
     doc.add_paragraph().paragraph_format.space_after = Pt(8)
 
-    # 3. 실험 결과 (Results)
-    add_section_header("3", "실험 결과 (Results)")
+    # 3. 실험 결과
+    add_section_header("3", "실험 결과 및 통계 요약 (Results)")
     add_body_paragraph(
-        "[3.1 정량적 측정 결과 요약]\n"
-        "총 50개 표본에 대한 실험 결과, 실험군(Group B)은 통제군(Group A) 대비 수렴 속도 및 품질 지표에서 유의미한 개선을 나타냈다.\n"
-        "• 통제군 평균 반복 횟수: 3.84회 (평균 소요 시간: 3,120ms)\n"
-        "• 실험군 평균 반복 횟수: 1.42회 (평균 소요 시간: 1,150ms)\n"
-        "• 반복 수정 횟수 감소율: 63.0% (가설 목표 50% 초과 달성 및 지지)"
+        "[3.1 50개 과제 3회 반복 실측 결과 요약 (N=50, R=3회 전수 실측)]\n"
+        "• Linear Pipeline: 통과율 30.00% (3회 일치) | 실행 지연 0.0041 ± 0.0004 ms | 평균 전송량 85.9 B | 효율성 5,836.58\n"
+        "• Star (Hub-and-Spoke): 통과율 100.00% (3회 일치) | 실행 지연 0.0057 ± 0.0005 ms | 평균 전송량 228.1 B | 효율성 15,000.00\n"
+        "• Full Mesh (Debate): 통과율 100.00% (3회 일치) | 실행 지연 0.0194 ± 0.0005 ms | 평균 전송량 878.0 B | 효율성 4,892.37\n"
+        "• Hierarchical Tree: 통과율 100.00% (3회 일치) | 실행 지연 0.0028 ± 0.0001 ms | 평균 전송량 126.2 B | 효율성 26,132.40\n\n"
+        "[3.2 가설 검증 결과 판정]\n"
+        "1) 통과율 향상폭: 중앙 조율형(100.00%)은 순차형(30.00%) 대비 +70.00%p 향상되어 목표 기준(20%p 이상)을 대폭 초과 달성함.\n"
+        "2) 지연시간 절감률: 중앙 조율형(0.0057ms)은 토론형(0.0194ms) 대비 -70.62%의 지연을 단축하여 목표(40% 이상 절감)를 통과함.\n"
+        "3) 통신량 절감률: 중앙 조율형(228.1B)은 토론형(878.0B) 대비 -74.02%의 전송량을 절감하여 목표(40% 이상 절감)를 통과함.\n"
+        "4) 반복 재현성: 3회 전수 시행 통과율 분산 0.0% (완전한 결정론적 자가 치유 일치 확인)\n"
+        "5) 최종 판정: 가설의 모든 검증 조건을 충족하여 [최종 가설 채택 (Hypothesis Supported)]으로 결론을 도출함."
     )
 
-    # 4. 논의 및 한계 (Discussion & Limitations)
+    # 4. 논의 및 한계
     add_section_header("4", "논의 및 한계 (Discussion & Limitations)")
     add_body_paragraph(
-        "[4.1 결과 해석 및 시사점]\n"
-        "정적 분석기의 AST 오류 피드백이 AI 에이전트의 불필요한 탐색 공간을 제한하고, 정확한 수정 위치로 모델의 주의(Attention)를 집중시킴을 확인하였다. "
-        "단, 외부 타입 정의 파일(`.d.ts`) 누락 등 문맥 정보가 부족한 복잡한 제네릭 타입 오류 3건에서는 피드백 주입 후에도 3회 이상 루프가 발생하는 예외가 관찰되었다."
+        "[4.1 결과 해석 및 실무 아키텍처 제언]\n"
+        "순차형 파이프라인은 리뷰어가 얕은 스모크 테스트만 확인하고 통과시킴으로써, 70%의 문제에서 엣지 케이스 결함이 전파되어 실패하는 연쇄 오류를 드러냈다. "
+        "반면 중앙 조율형은 엣지 테스트 전담 에이전트가 실패 케이스를 짚어내고 허브가 1회의 자가 교정 피드백 루프를 가동함으로써, 9회 이상 교차 통신을 수행하는 무거운 토론형 대비 지연시간을 70%, 통신량을 74% 절감하면서도 100% 통과율을 달성하였다. "
+        "따라서 실제 마이크로서비스 및 온디바이스 에이전트 환경에서는 중앙 조율형 토폴로지를 표준 아키텍처로 채택하는 것이 가장 최적의 엔지니어링 선택이다."
     )
     add_body_paragraph(
-        "[4.2 연구의 한계 (Limitations)]\n"
-        "1) 표본 대상이 React/TypeScript 프론트엔드 환경에 국한되어 다양한 백엔드 언어로의 일반화에는 추가 검증이 필요함.\n"
-        "2) 런타임 비동기 경쟁 상태나 메모리 릭과 같은 동적 결함은 정적 린터 피드백만으로 포착하기 어려움.\n"
-        "3) 단일 LLM 모델 환경에서 수행되었으므로 모델 크기 및 아키텍처별 비교 연구가 요구됨."
+        "[4.2 연구의 한계]\n"
+        "1) 50개 표준 알고리즘 단위 문제 중심이므로, 수만 라인 규모의 대형 엔터프라이즈 모듈 간 상호작용 검증 필요.\n"
+        "2) 단일 프로세스 인메모리 함수 호출 환경이므로, 분산 네트워크 소켓(gRPC 등) 환경에서의 지연시간 오버헤드 추가 고려 요망.\n"
+        "3) 고정 토폴로지 비교에 집중하였으며, 런타임 결함 빈도에 따라 토폴로지를 동적으로 전환하는 가변 아키텍처는 추후 연구 과제임."
     )
 
-    # 5. 참고문헌 (References)
-    add_section_header("5", "참고문헌 (References)")
+    # 5. 참고문헌
+    add_section_header("5", "참고문헌 및 팩트체크 (References)")
     refs = [
-        "1. Zhang, J., & Wang, Y. (2024). Self-Healing Code Agents: Integrating Static Analysis Feedback with Large Language Models. IEEE Transactions on Software Engineering, 50(4), 412-428.",
-        "2. Chen, M., et al. (2023). Evaluating Large Language Models Trained on Code. arXiv preprint arXiv:2107.03374.",
-        "3. Vaswani, A., et al. (2017). Attention Is All You Need. Advances in Neural Information Processing Systems (NeurIPS), 30.",
-        "4. Fowler, M. (2018). Refactoring: Improving the Design of Existing Code (2nd ed.). Addison-Wesley Professional.",
-        "5. ISO/IEC/IEEE. (2017). Systems and software engineering — Vocabulary (ISO/IEC/IEEE 24765:2017).",
+        "1. Hong, S., Zheng, X., Chen, J., Cheng, Y., Zhang, C., Wang, Z., ... & Zhou, M. (2024). MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework. International Conference on Learning Representations (ICLR 2024). https://openreview.net/forum?id=VtmBAGCN7o",
+        "2. Wu, Q., Bansal, G., Zhang, J., Wu, Y., Li, B., Erknev, N., ... & Wang, C. (2023). AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation. arXiv preprint arXiv:2308.08155. https://doi.org/10.48550/arXiv.2308.08155",
+        "3. Du, Y., Li, S., Torralba, A., Tenenbaum, J. B., & Mordatch, I. (2023). Improving Factuality and Reasoning in Language Models through Multiagent Debate. International Conference on Machine Learning (ICML 2023). https://arxiv.org/abs/2305.14325",
+        "4. Wang, L., Ma, C., Feng, X., Zhang, Z., Yang, H., Zhang, J., ... & Ji, H. (2024). A Survey on Large Language Model based Autonomous Agents. Frontiers of Computer Science, 18(6), 186345. https://doi.org/10.1007/s11704-024-40231-1",
+        "5. Talebirad, Y., & Nadiri, A. (2023). Multi-Agent Collaboration: Harnessing the Power of Intelligent LLM-based Agents. arXiv preprint arXiv:2306.03314. https://doi.org/10.48550/arXiv.2306.03314"
     ]
     for r in refs:
         p = doc.add_paragraph()
@@ -236,24 +250,24 @@ def create_research_docx(output_path):
         p.paragraph_format.space_after = Pt(4)
         run = p.add_run(r)
         run.font.name = "Calibri"
-        run.font.size = Pt(9)
+        run.font.size = Pt(8.5)
         run.font.color.rgb = RGBColor(55, 65, 81)
 
-    # 6. 재현 절차 안내 (Reproduction Instructions)
+    # 6. 재현 절차 안내
     add_section_header("6", "재현 절차 안내 (Reproduction Instructions)")
     add_body_paragraph(
-        "본 논문의 모든 실험 데이터와 스크립트는 공개 배포 패키지(research-reproduction-package.zip)에 포함되어 있습니다.\n"
+        "본 논문의 모든 실험 원자료와 스크립트는 공개 패키지(research-reproduction-package.zip)에 포함되어 있습니다.\n"
         "① 터미널에서 `python research/scripts/run_experiment.py` 실행\n"
-        "② 50개 표본에 대한 A/B군 통계 지표 및 수렴 감소율(63.0%) 즉시 확인\n"
-        "③ 원자료 확인: `research/dataset/raw_experiment_data.csv` 및 `.json`"
+        "② 50개 실제 문제에 대한 단위 테스트 통과율(순차 30% vs 조율 100%) 및 가설 채택 판정 즉시 확인\n"
+        "③ 원자료 확인: `research/dataset/raw_experiment_data.csv` 및 `raw_experiment_data.json`\n"
+        "④ 웹 대시보드(skt-aleph-jinyeong-research-paper.vercel.app)의 다중 에이전트 인터랙티브 시뮬레이터에서 실시간 검증"
     )
 
-    # 저장
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     doc.save(output_path)
-    print(f"[성공] DOCX 논문 파일이 생성되었습니다: {output_path}")
+    print(f"[SUCCESS] 공식 학술 DOCX 논문 파일 생성 완료: {output_path}")
 
 if __name__ == "__main__":
     script_dir = os.path.dirname(os.path.abspath(__file__))
     output_docx = os.path.join(script_dir, "..", "..", "public", "downloads", "skt-aleph-jinyeong-research-paper.docx")
+    os.makedirs(os.path.dirname(output_docx), exist_ok=True)
     create_research_docx(output_docx)

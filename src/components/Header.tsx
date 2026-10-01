@@ -14,8 +14,9 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { href: '#research-paper', label: '연구 논문', desc: '가설 검증 & DOCX / 재현 패키지' },
-  { href: '#contact', label: '연락처', desc: '공식 이메일 및 GitHub 소통' },
+  { href: '#research-paper', label: '논문 전문 (IMRaD)', desc: '가설 검증 & DOCX / 재현 패키지' },
+  { href: '#simulator', label: '실시간 시뮬레이터', desc: '4대 토폴로지 단위 테스트 인터랙티브 실험' },
+  { href: '#charts', label: '실측 통계 차트', desc: 'Pandas 실측 통계 및 5대 세부 차트' },
 ];
 
 export const Header: React.FC<HeaderProps> = ({ className }) => {
